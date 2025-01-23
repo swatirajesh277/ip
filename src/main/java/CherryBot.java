@@ -8,6 +8,7 @@ public class CherryBot {
 
         Scanner msg = new Scanner(System.in);
         String userInput;
+        String[] li = new String[100];
 
         while(true) {
             userInput = msg.nextLine();
@@ -19,7 +20,7 @@ public class CherryBot {
                 break;
             } else {
                 System.out.println("\t________________________________________");
-                System.out.println("\t" + userInput);
+                System.out.println("\t" + "added: " + userInput);
                 System.out.println("\t________________________________________");
             }
         }
