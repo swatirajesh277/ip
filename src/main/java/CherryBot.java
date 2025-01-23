@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CherryBot {
@@ -9,8 +10,8 @@ public class CherryBot {
 
         Scanner msg = new Scanner(System.in);
         String userInput;
-        Task[] tasks = new Task[100];
-        int itemsCount = 0;
+        ArrayList<Task> tasks = new ArrayList<>();
+
 
         while(true) {
             userInput = msg.nextLine();
@@ -23,14 +24,34 @@ public class CherryBot {
                     break;
 
                 } else if (userInput.equals("list")) {
-                    if (itemsCount == 0) {
+                    if (tasks.isEmpty()) {
                         System.out.println("\tNo tasks in list");
                     } else {
                         System.out.println("\tHere are the tasks in your list:");
-                        for (int i = 0; i < itemsCount; i++) {
-                            System.out.println("\t" + (i+1) + ". " + tasks[i].toString());
+                        for (int i = 0; i < tasks.size(); i++) {
+                            System.out.println("\t" + (i+1) + ". " + tasks.get(i).toString());
                         }
                     }
+
+                } else if (userInput.trim().startsWith("delete")) {
+                    String[] splitCommand = userInput.trim().split(" ");
+
+                    if (splitCommand.length < 2) {
+                        throw new CherryBotException("Task number is missing");
+                    }
+
+                    String foo = splitCommand[1];
+                    int taskNumber = Integer.parseInt(foo);
+
+                    if (taskNumber > tasks.size() || taskNumber <= 0) {
+                        throw new CherryBotException("Task number is invalid");
+                    }
+
+                    Task del = tasks.remove(taskNumber - 1);
+                    System.out.println("\tNoted. I've removed this task:");
+                    System.out.println("\t\t" + del.toString());
+                    System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
+
 
                 } else if (userInput.trim().startsWith("mark")) {
                     String[] splitCommand = userInput.trim().split(" ");
@@ -42,12 +63,12 @@ public class CherryBot {
                     String foo = splitCommand[1];
                     int taskNumber = Integer.parseInt(foo);
 
-                    if (taskNumber > itemsCount || taskNumber <= 0) {
+                    if (taskNumber > tasks.size() || taskNumber <= 0) {
                         throw new CherryBotException("Invalid task number");
                     }
-                    tasks[taskNumber - 1].markAsDone();
+                    tasks.get(taskNumber - 1).markAsDone();
                     System.out.println("\tNice! I've marked this task as done:");
-                    System.out.println("\t\t" + tasks[taskNumber - 1].toString());
+                    System.out.println("\t\t" + tasks.get(taskNumber - 1).toString());
 
                 } else if (userInput.trim().startsWith("unmark")) {
                     String[] splitCommand = userInput.trim().split(" ");
@@ -59,13 +80,13 @@ public class CherryBot {
                     String foo = splitCommand[1];
                     int taskNumber = Integer.parseInt(foo);
 
-                    if (taskNumber > itemsCount || taskNumber <= 0) {
+                    if (taskNumber > tasks.size() || taskNumber <= 0) {
                         throw new CherryBotException("Invalid task number");
                     }
                     
-                    tasks[taskNumber - 1].markAsNotDone();
+                    tasks.get(taskNumber - 1).markAsNotDone();
                     System.out.println("\tOkay, I've marked this task as not done yet:");
-                    System.out.println("\t\t" + tasks[taskNumber - 1].toString());
+                    System.out.println("\t\t" + tasks.get(taskNumber - 1).toString());
 
                 } else if (userInput.trim().startsWith("todo")) {
                     String description = userInput.trim().substring(5);
@@ -74,11 +95,10 @@ public class CherryBot {
                         throw new CherryBotException("Todo description cannot be empty");
                     }
                     
-                    tasks[itemsCount] = new Todo(description);
-                    itemsCount++;
+                    tasks.add(new Todo(description));
                     System.out.println("\tGot it. I've added this task:");
-                    System.out.println("\t\t" + tasks[itemsCount - 1].toString());
-                    System.out.println("\tNow you have " + itemsCount + " tasks in the list.");
+                    System.out.println("\t\t" + tasks.get(tasks.size() - 1).toString());
+                    System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
 
                 } else if (userInput.trim().startsWith("deadline")) {
                     String activity = userInput.trim().substring(9);
@@ -90,11 +110,10 @@ public class CherryBot {
                     String[] splitCommand = activity.trim().split(" /by");
                     String description = splitCommand[0];
                     String by = splitCommand[1].trim();
-                    tasks[itemsCount] = new Deadline(description, by);
-                    itemsCount++;
+                    tasks.add(new Deadline(description, by));
                     System.out.println("\tGot it. I've added this task:");
-                    System.out.println("\t\t" + tasks[itemsCount - 1].toString());
-                    System.out.println("\tNow you have " + itemsCount + " tasks in the list.");
+                    System.out.println("\t\t" + tasks.get(tasks.size() - 1).toString());
+                    System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
 
                 } else if (userInput.trim().startsWith("event")) {
                     String activity = userInput.trim().substring(6);
@@ -107,11 +126,10 @@ public class CherryBot {
                     String description = splitCommand[0].trim();
                     String start = splitCommand[1].trim().substring(5);
                     String end = splitCommand[2].trim().substring(3);
-                    tasks[itemsCount] = new Event(description, start, end);
-                    itemsCount++;
+                    tasks.add(new Event(description, start, end));
                     System.out.println("\tGot it. I've added this task:");
-                    System.out.println("\t\t" + tasks[itemsCount - 1].toString());
-                    System.out.println("\tNow you have " + itemsCount + " tasks in the list.");
+                    System.out.println("\t\t" + tasks.get(tasks.size() - 1).toString());
+                    System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
                 } else {
                     throw new CherryBotException("Sorry I don't understand invalid command");
                 }
