@@ -47,10 +47,38 @@ public class CherryBot {
                 System.out.println("\tOkay, I've marked this task as not done yet: ");
                 System.out.println("\t\t" + tasks[taskNumber - 1].toString());
 
-            } else {
-                tasks[itemsCount] = new Task(userInput);
+            } else if (userInput.trim().startsWith("todo")) {
+                String description = userInput.trim().substring(5);
+                tasks[itemsCount] = new Todo(description);
                 itemsCount++;
-                System.out.println("\t" + "added: " + userInput);
+                System.out.println("\tGot it. I've added this task: ");
+                System.out.println("\t\t" + tasks[itemsCount - 1].toString());
+                System.out.println("\tNow you have " + itemsCount + " tasks in the list.");
+                
+            } else if (userInput.trim().startsWith("deadline")) {
+                String activity = userInput.trim().substring(9);
+                String[] splitCommand = activity.trim().split(" /by");
+                String description = splitCommand[0];
+                String by = splitCommand[1].trim();
+                tasks[itemsCount] = new Deadline(description, by);
+                itemsCount++;
+                System.out.println("\tGot it. I've added this task: ");
+                System.out.println("\t\t" + tasks[itemsCount - 1].toString());
+                System.out.println("\tNow you have " + itemsCount + " tasks in the list.");
+
+            } else if (userInput.trim().startsWith("event")) {
+                String activity = userInput.trim().substring(6);
+                String[] splitCommand = activity.trim().split("/");
+                String description = splitCommand[0].trim();
+                String start = splitCommand[1].trim().substring(5);
+                String end = splitCommand[2].trim().substring(3);
+                tasks[itemsCount] = new Event(description, start, end);
+                itemsCount++;
+                System.out.println("\tGot it. I've added this task: ");
+                System.out.println("\t\t" + tasks[itemsCount - 1].toString());
+                System.out.println("\tNow you have " + itemsCount + " tasks in the list.");
+            } else {
+                System.out.println("Wrong format of task entered");
             }
 
             System.out.println("\t________________________________________");
