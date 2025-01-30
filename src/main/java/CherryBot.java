@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class CherryBot {
     public static void main(String[] args) {
@@ -7,6 +11,36 @@ public class CherryBot {
         Scanner msg = new Scanner(System.in);
         String userInput;
         ArrayList<Task> tasks = new ArrayList<>();
+
+        File dataDir = new File("./data");
+        if (!dataDir.exists()) {
+            dataDir.mkdir();
+        }
+
+
+        File f = new File("./data/cherrybot.txt");
+        if (!f.exists()) {
+            try {
+                f.createNewFile();
+            } catch (IOException e) {
+                System.out.println("Error creating file: " + e.getMessage());
+            }
+        }
+
+        try {
+            Scanner fileReader = new Scanner(f);
+            while (fileReader.hasNextLine()) {
+
+                String line = fileReader.nextLine();
+                Task t = stringToTask(line);
+                tasks.add(t);
+            }
+
+            fileReader.close();
+
+        } catch (FileNotFoundException e) {
+            System.out.println("OOPSIE DAISY!!! An error has occurred in reading the file");
+        }
 
         greet();
 
@@ -18,8 +52,14 @@ public class CherryBot {
                 if (userInput.equals("bye")) {
                     System.out.println("\tBye. See you later alligator!");
                     System.out.println("\t________________________________________");
-                    break;
 
+                    String file2 = "./data/cherrybot.txt";
+                    try {
+                        writeToFile(file2,list(userInput, tasks));
+                    } catch (IOException e) {
+                        System.out.println("Something went wrong: " + e.getMessage());
+                    }
+                    break;
                 } else {
                     handleOtherThings(userInput, tasks);
                 }
@@ -152,5 +192,54 @@ public class CherryBot {
         } else {
             throw new CherryBotException("Sorry I don't understand invalid command");
         }
+    }
+
+    private static Task stringToTask(String line) {
+        if (line.charAt(1) == 'T') {
+            String description = line.trim().substring(7);
+
+            Todo t = new Todo(description);
+            if (line.charAt(4) == 'X') {
+                t.markAsDone();
+            }
+            return t;
+        } else if (line.charAt(1) == 'D') {
+            String[] splitCommand = line.trim().split(" \\(by: ");
+            String by = splitCommand[1].split("\\)")[0].strip();
+            String description = splitCommand[0].substring(7);
+
+            Deadline d =  new Deadline(description, by);
+            if (line.charAt(4) == 'X') {
+                d.markAsDone();
+            }
+            return d;
+        } else {
+            String[] splitCommand1 = line.trim().split(" \\(from: ");
+            String[] splitCommand2 = splitCommand1[1].trim().split("to: ");
+            String description = splitCommand1[0].trim().substring(7);
+            String start = splitCommand2[0].trim();
+            String[] end = splitCommand2[1].trim().split("\\)");
+            Event e = new Event(description, start, end[0]);
+            if (line.charAt(4) == 'X') {
+                e.markAsDone();
+            }
+            return e;
+        }
+    }
+
+    private static void writeToFile(String filepath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filepath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    private static String list(String userInput, ArrayList<Task> tasks) {
+        String s = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            s += tasks.get(i).toString();
+            s += "\n";
+        }
+
+        return s;
     }
 }
