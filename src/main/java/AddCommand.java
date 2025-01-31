@@ -1,18 +1,15 @@
+import java.io.IOException;
 
-import TaskList;
-import Storage;
-public class TodoAddCommand extends Command {
-    private String taskDescription;
-    public TodoAddCommand(String taskDescription) {
-        this.taskDescription = taskDescription;
+public class AddCommand extends Command {
+    private Task t;
+    public AddCommand(Task t) {
+        this.t = t;
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws CherryBotException {
-        tasks.addTask(new Todo(taskDescription));
-        ui.showTodoAdd();
-
-
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+        tasks.addTask(t);
+        ui.showAdd(t, tasks);
     }
 
 }

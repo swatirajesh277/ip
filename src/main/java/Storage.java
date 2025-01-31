@@ -86,27 +86,10 @@ public class Storage {
         }
     }
 
-    public static void writeToFile(String filepath, String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filepath);
+    public static void writeToFile(String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter("./data/cherrybot.txt");
         fw.write(textToAdd);
         fw.close();
-    }
-
-    public static void fileNotExists() {
-        File dataDir = new File("./data");
-        if (!dataDir.exists()) {
-            dataDir.mkdir();
-        }
-
-
-        File f = new File("./data/cherrybot.txt");
-        if (!f.exists()) {
-            try {
-                f.createNewFile();
-            } catch (IOException e) {
-                System.out.println("Error creating file: " + e.getMessage());
-            }
-        }
     }
 
 
