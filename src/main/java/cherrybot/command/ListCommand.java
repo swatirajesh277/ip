@@ -1,3 +1,9 @@
+package cherrybot.command;
+
+import cherrybot.storage.Storage;
+import cherrybot.ui.TaskList;
+import cherrybot.ui.Ui;
+
 import java.io.IOException;
 
 public class ListCommand extends Command {

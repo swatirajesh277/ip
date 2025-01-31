@@ -1,14 +1,18 @@
+package cherrybot.ui;
+
+import cherrybot.task.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks;
 
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
     public TaskList() {
-        this.tasks = null;
+        this.tasks = new ArrayList<>();
     }
 
     public void addTask(Task task) {

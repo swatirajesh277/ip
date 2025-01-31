@@ -1,4 +1,8 @@
+package cherrybot.ui;
+
 import java.util.Scanner;
+
+import cherrybot.task.Task;
 
 public class Ui {
 
