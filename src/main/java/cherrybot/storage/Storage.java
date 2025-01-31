@@ -1,3 +1,10 @@
+package cherrybot.storage;
+
+import cherrybot.task.Deadline;
+import cherrybot.task.Event;
+import cherrybot.task.Task;
+import cherrybot.ui.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

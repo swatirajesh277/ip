@@ -1,3 +1,5 @@
+package cherrybot.exception;
+
 public class CherryBotException extends Exception {
 
     public CherryBotException(String message) {

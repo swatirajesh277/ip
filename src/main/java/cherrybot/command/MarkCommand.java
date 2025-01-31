@@ -1,3 +1,10 @@
+package cherrybot.command;
+
+import cherrybot.storage.Storage;
+import cherrybot.task.Task;
+import cherrybot.ui.TaskList;
+import cherrybot.ui.Ui;
+
 import java.io.IOException;
 
 public class MarkCommand extends Command {

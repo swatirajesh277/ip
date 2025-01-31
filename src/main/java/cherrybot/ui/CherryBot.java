@@ -1,11 +1,11 @@
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
+package cherrybot.ui;
+
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
+
+import cherrybot.command.Command;
+import cherrybot.exception.CherryBotException;
+import cherrybot.storage.Storage;
+
 
 
 public class CherryBot {
@@ -45,7 +45,7 @@ public class CherryBot {
     }
 
     public static void main(String[] args) {
-        new CherryBot("data/tasks.txt").run();
+        new CherryBot("./data/cherrybot.txt").run();
     }
 
 }
