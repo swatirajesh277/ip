@@ -1,9 +1,12 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+
 
 public class CherryBot {
     public static void main(String[] args) {
@@ -168,7 +171,7 @@ public class CherryBot {
 
             String[] splitCommand = activity.trim().split(" /by");
             String description = splitCommand[0];
-            String by = splitCommand[1].trim();
+            LocalDateTime by = LocalDateTime.parse(splitCommand[1].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
             tasks.add(new Deadline(description, by));
             System.out.println("\tGot it. I've added this task:");
             System.out.println("\t\t" + tasks.get(tasks.size() - 1).toString());
@@ -205,7 +208,9 @@ public class CherryBot {
             return t;
         } else if (line.charAt(1) == 'D') {
             String[] splitCommand = line.trim().split(" \\(by: ");
-            String by = splitCommand[1].split("\\)")[0].strip();
+            String finDate = splitCommand[1].replace(")", "");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm:ss");
+            LocalDateTime by = LocalDateTime.parse(finDate.trim(), formatter);
             String description = splitCommand[0].substring(7);
 
             Deadline d =  new Deadline(description, by);

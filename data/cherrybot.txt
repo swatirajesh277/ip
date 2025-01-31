@@ -1,5 +1,4 @@
 [T][X] homework cs2103t
-[D][X] ps1 (by: Monday)
 [E][X] wit meeting (from: Sunday 10pm to: 11pm)
 [T][ ] Shower
 [T][X] change sheets
@@ -8,3 +7,4 @@
 [T][ ] gym
 [T][X] wash clothes
 [T][ ] send telebubble
+[D][ ] cs2103t ip (by: Jan 31 2025 16:00:00)
