@@ -16,12 +16,13 @@ public class CherryBot {
     public CherryBot(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        try {
-            tasks = new TaskList(storage.loadFile(filePath));
-        } catch (Exception e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }
+//        try {
+        tasks = new TaskList(storage.loadFile(filePath));
+//        } catch (CherryBotException e) {
+//            System.out.println(e.getMessage());
+////            ui.showLoadingError();
+ //       tasks = new TaskList();
+//        }
     }
 
     public void run() {

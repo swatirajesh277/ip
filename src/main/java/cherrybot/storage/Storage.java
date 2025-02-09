@@ -70,7 +70,8 @@ public class Storage {
         } else if (line.charAt(1) == 'D') {
             String[] splitCommand = line.trim().split(" \\(by: ");
             String finDate = splitCommand[1].replace(")", "");
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm:ss");
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
             LocalDateTime by = LocalDateTime.parse(finDate.trim(), formatter);
             String description = splitCommand[0].substring(7);
 
