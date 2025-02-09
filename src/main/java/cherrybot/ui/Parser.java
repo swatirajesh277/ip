@@ -52,7 +52,12 @@ public class Parser {
             return new UnmarkCommand(taskNumber - 1);
 
         } else if (msg.startsWith("todo")) {
-            String description = msg.trim().substring(5);
+
+            if (msg.length() < 5 || msg.charAt(4) != ' ') {
+                throw new CherryBotException("Invalid format! The todo command must be followed by a space and a description.");
+            }
+
+            String description = msg.substring(5).trim();
 
             if (description.isEmpty()) {
                 throw new CherryBotException("Todo description cannot be empty");
@@ -75,7 +80,7 @@ public class Parser {
             return new AddCommand(t);
 
         } else if (msg.startsWith("event")) {
-            String activity = msg.trim().substring(6);
+            String activity = msg.trim().substring(5);
 
             if (!activity.contains(" /from") && !activity.contains(" /to")) {
                 throw new CherryBotException("Event command invalid : <description> /from <time> /to <time>");
