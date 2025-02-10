@@ -28,7 +28,7 @@ test {
 }
 
 application {
-    mainClass.set("cherrybot.ui.Main")
+    mainClass.set("cherrybot.ui.CherryBot")
 }
 
 shadowJar {
