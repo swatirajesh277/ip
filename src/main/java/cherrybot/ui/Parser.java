@@ -2,6 +2,7 @@ package cherrybot.ui;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import cherrybot.command.*;
 import cherrybot.exception.CherryBotException;
@@ -74,10 +75,15 @@ public class Parser {
             }
 
             String[] splitCommand = activity.trim().split(" /by");
-            String description = splitCommand[0];
-            LocalDateTime by = LocalDateTime.parse(splitCommand[1].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-            Task t = new Deadline(description, by);
-            return new AddCommand(t);
+            String description = splitCommand[0].trim();
+
+            try {
+                LocalDateTime by = LocalDateTime.parse(splitCommand[1].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+                Task t = new Deadline(description, by);
+                return new AddCommand(t);
+            } catch (DateTimeParseException e) {
+                throw new CherryBotException("Invalid date format! Please use dd/MM/yyyy HH:mm");
+            }
 
         } else if (msg.startsWith("event")) {
             String activity = msg.trim().substring(5);
