@@ -3,7 +3,7 @@ package cherrybot.storage;
 import cherrybot.task.Deadline;
 import cherrybot.task.Event;
 import cherrybot.task.Task;
-import cherrybot.ui.Todo;
+import cherrybot.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;

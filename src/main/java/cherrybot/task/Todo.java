@@ -1,6 +1,6 @@
-package cherrybot.ui;
+package cherrybot.task;
 
-import cherrybot.task.Task;
+
 
 public class Todo extends Task {
 

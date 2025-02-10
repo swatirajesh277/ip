@@ -2,13 +2,13 @@ package cherrybot.ui;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 import cherrybot.command.*;
 import cherrybot.exception.CherryBotException;
 import cherrybot.task.Deadline;
 import cherrybot.task.Event;
 import cherrybot.task.Task;
+import cherrybot.task.Todo;
 
 
 public class Parser {
