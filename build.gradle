@@ -32,8 +32,7 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "cherrybot"
-    archiveClassifier = null
+    archiveFileName = "cherrybot.jar"
 }
 
 run{
