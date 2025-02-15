@@ -14,13 +14,24 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles reading from and writing to the storage file for CherryBot's tasks.
+ */
 public class Storage {
     private String filepath;
 
+    /**
+     * Constructs a Storage object with the specified file path.
+     *
+     * @param filepath The path to the file where all tasks will be stored.
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * Creates the necessary directories and the storage file if they do not exist.
+     */
     public static void createFileIfNotExists() {
         File dataDir = new File("./data");
         if (!dataDir.exists()) {
@@ -38,6 +49,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from the specified file into an ArrayList.
+     * Each line in the file represents a task and is converted into the appropriate Task object.
+     *
+     * @param filepath The path to the file containing tasks.
+     * @return An ArrayList of Task objects read from the file.
+     */
     public static ArrayList<Task> loadFile(String filepath) {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -58,6 +76,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Converts a string representation of a task into an actual Task object.
+     *
+     * @param line The string representation of the task.
+     * @return The corresponding Task object created from the string.
+     */
     private static Task stringToTask(String line) {
         if (line.charAt(1) == 'T') {
             String description = line.trim().substring(7);
@@ -97,6 +121,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the specified text to the storage file.
+     * This can be used to update the task list in the file.
+     *
+     * @param textToAdd The text to be written to the file.
+     * @throws IOException If there is an issue writing to the file.
+     */
     public static void writeToFile(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter("./data/cherrybot.txt");
         fw.write(textToAdd);

@@ -12,8 +12,20 @@ import cherrybot.task.Task;
 import cherrybot.task.Todo;
 
 
+/**
+ * Parses user input commands and returns the appropriate command object.
+ * This class is responsible for interpreting and validating user commands,
+ * such as "list", "mark", "deadline", "event", and "to-do".
+ */
 public class Parser {
 
+    /**
+     * Parses a user input message and returns a corresponding command object.
+     *
+     * @param msg The user input message.
+     * @return A Command object representing the user's intent.
+     * @throws CherryBotException If the input command is invalid or cannot be parsed.
+     */
     public static Command parse(String msg) throws CherryBotException {
         if (msg.equals("bye")) {
             return new ByeCommand();

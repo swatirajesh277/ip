@@ -7,24 +7,33 @@ import cherrybot.exception.CherryBotException;
 import cherrybot.storage.Storage;
 
 
-
+/**
+ * Main class for CherryBot
+ * This class handles the running of the bot, reading user commands, executing commands, and handling errors.
+ */
 public class CherryBot {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs a CherryBot instance with the given file path for storing tasks.
+     * Initializes the UI, storage, and task list.
+     *
+     * @param filePath The path to the file where tasks are stored.
+     */
     public CherryBot(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-//        try {
+
         tasks = new TaskList(storage.loadFile(filePath));
-//        } catch (CherryBotException e) {
-//            System.out.println(e.getMessage());
-////            ui.showLoadingError();
- //       tasks = new TaskList();
-//        }
     }
 
+    /**
+     * Runs the CherryBot application, managing the main loop of user interactions.
+     * Reads user input, parses commands, executes them, and handles any exceptions.
+     * The loop continues until the user issues an exit command.
+     */
     public void run() {
         ui.greeting();
         boolean isExit = false;
@@ -45,6 +54,12 @@ public class CherryBot {
         }
     }
 
+    /**
+     * The entry point for running the CherryBot app.
+     * Creates an instance of CherryBot and starts its execution.
+     *
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         new CherryBot("./data/cherrybot.txt").run();
     }
