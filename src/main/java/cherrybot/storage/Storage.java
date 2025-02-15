@@ -3,7 +3,7 @@ package cherrybot.storage;
 import cherrybot.task.Deadline;
 import cherrybot.task.Event;
 import cherrybot.task.Task;
-import cherrybot.ui.Todo;
+import cherrybot.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -81,12 +81,15 @@ public class Storage {
             }
             return d;
         } else {
-            String[] splitCommand1 = line.trim().split(" \\(from: ");
-            String[] splitCommand2 = splitCommand1[1].trim().split("to: ");
-            String description = splitCommand1[0].trim().substring(7);
-            String start = splitCommand2[0].trim();
-            String[] end = splitCommand2[1].trim().split("\\)");
-            Event e = new Event(description, start, end[0]);
+            String[] splitCommand = line.trim().split(" \\(from: ");
+            String[] splitTimes = splitCommand[1].replace(")", "").split(" to: ");
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+            LocalDateTime start = LocalDateTime.parse(splitTimes[0].trim(), formatter);
+            LocalDateTime end = LocalDateTime.parse(splitTimes[1].trim(), formatter);
+            String description = splitCommand[0].substring(7).trim();
+
+            Event e = new Event(description, start, end);
             if (line.charAt(4) == 'X') {
                 e.markAsDone();
             }

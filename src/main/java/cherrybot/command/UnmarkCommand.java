@@ -1,5 +1,6 @@
 package cherrybot.command;
 
+import cherrybot.exception.CherryBotException;
 import cherrybot.storage.Storage;
 import cherrybot.task.Task;
 import cherrybot.ui.TaskList;
@@ -16,8 +17,12 @@ public class UnmarkCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        Task t = tasks.getTask(taskNumber);
-        t.markAsNotDone();
-        ui.showUnmarkTask(t, tasks);
+        try {
+            Task t = tasks.getTask(taskNumber);
+            tasks.markAsNotDoneToTask(taskNumber);
+            ui.showUnmarkTask(t, tasks);
+        } catch (IndexOutOfBoundsException | CherryBotException e) {
+            ui.showError(e.getMessage());
+        }
     }
 }

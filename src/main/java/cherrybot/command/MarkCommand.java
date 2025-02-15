@@ -4,6 +4,7 @@ import cherrybot.storage.Storage;
 import cherrybot.task.Task;
 import cherrybot.ui.TaskList;
 import cherrybot.ui.Ui;
+import cherrybot.exception.CherryBotException;
 
 import java.io.IOException;
 
@@ -16,8 +17,12 @@ public class MarkCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        Task t = tasks.getTask(taskNumber);
-        t.markAsDone();
-        ui.showMarkTask(t, tasks);
+        try {
+            Task t = tasks.getTask(taskNumber);
+            tasks.markAsDoneToTask(taskNumber);
+            ui.showMarkTask(t, tasks);
+        } catch (IndexOutOfBoundsException | CherryBotException e) {
+            ui.showError(e.getMessage());
+        }
     }
 }
