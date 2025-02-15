@@ -2,12 +2,20 @@ package cherrybot.ui;
 
 import java.util.Scanner;
 
+import cherrybot.exception.CherryBotException;
 import cherrybot.task.Task;
 
 public class Ui {
 
     public static void greeting() {
         System.out.println("\t________________________________________");
+        System.out.println("   ____   _   _  U _____ u   ____      ____     __   __   ____     U  ___ u _____  \n" +
+                "U /\"___| |'| |'| \\| ___\"|/U |  _\"\\ uU |  _\"\\ u  \\ \\ / /U | __\")u    \\/\"_ \\/|_ \" _| \n" +
+                "\\| | u  /| |_| |\\ |  _|\"   \\| |_) |/ \\| |_) |/   \\ V /  \\|  _ \\/    | | | |  | |   \n" +
+                " | |/__ U|  _  |u | |___    |  _ <    |  _ <    U_|\"|_u  | |_) |.-,_| |_| | /| |\\  \n" +
+                "  \\____| |_| |_|  |_____|   |_| \\_\\   |_| \\_\\     |_|    |____/  \\_)-\\___/ u |_|U  \n" +
+                " _// \\\\  //   \\\\  <<   >>   //   \\\\_  //   \\\\_.-,//|(_  _|| \\\\_       \\\\   _// \\\\_ \n" +
+                "(__)(__)(_\") (\"_)(__) (__) (__)  (__)(__)  (__)\\_) (__)(__) (__)     (__) (__) (__)");
         System.out.println("Hello! I'm CherryBot");
         System.out.println("What can I do for you?");
         System.out.println("\t________________________________________");
@@ -47,8 +55,12 @@ public class Ui {
     public static String listFormatForFile(TaskList list) {
         String s = "";
         for (int i = 0; i < list.size(); i++) {
-            s += list.getTask(i).toString();
-            s += "\n";
+            try {
+                s += list.getTask(i).toString();
+                s += "\n";
+            } catch (CherryBotException e) {
+                System.out.println("Error while retrieving task at index " + i + ": " + e.getMessage());
+            }
         }
 
         return s;

@@ -27,7 +27,9 @@ public class Parser {
             if (splitCommand.length < 2) {
                 throw new CherryBotException("Task number is missing");
             }
+
             int taskNumber = Integer.parseInt(splitCommand[1]) - 1;
+
             return new DeleteCommand(taskNumber);
 
         } else if (msg.startsWith("mark")) {
@@ -92,13 +94,26 @@ public class Parser {
                 throw new CherryBotException("Event command invalid : <description> /from <time> /to <time>");
             }
 
-            String[] splitCommand = activity.trim().split("/");
-            String description = splitCommand[0].trim();
-            String start = splitCommand[1].trim().substring(5);
-            String end = splitCommand[2].trim().substring(3);
+            try {
+                String[] splitCommand = activity.split(" /from ");
+                String description = splitCommand[0].trim();
 
-            Task t = new Event(description, start, end);
-            return new AddCommand(t);
+                String[] timeParts = splitCommand[1].split(" /to ");
+
+                if (timeParts.length < 2) {
+                    throw new CherryBotException("Event command inavlid : Missing /to time");
+                }
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                LocalDateTime start = LocalDateTime.parse(timeParts[0].trim(), formatter);
+                LocalDateTime end = LocalDateTime.parse(timeParts[1].trim(), formatter);
+
+                Task t = new Event(description, start, end);
+                return new AddCommand(t);
+
+            } catch (DateTimeParseException e) {
+                throw new CherryBotException("Invalid date format! Please use dd/MM/yyyy HH:mm");
+            }
 
         } else {
             throw new CherryBotException("Sorry I don't understand invalid command");
