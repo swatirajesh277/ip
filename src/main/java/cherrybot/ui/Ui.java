@@ -1,5 +1,6 @@
 package cherrybot.ui;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import cherrybot.exception.CherryBotException;
@@ -78,5 +79,16 @@ public class Ui {
 
     public void showError(String message) {
         System.out.println("OOPSIE DAISY!!!" + message);
+    }
+
+    public void showFind(ArrayList<Task> list) {
+        if (list.isEmpty()) {
+            System.out.println("No matching tasks found!");
+        } else {
+            System.out.println("Here are the matching tasks in your list: ");
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println("\t" + (i + 1) + ". " + list.get(i).toString());
+            }
+        }
     }
 }

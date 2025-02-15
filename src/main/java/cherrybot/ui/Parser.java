@@ -115,6 +115,14 @@ public class Parser {
                 throw new CherryBotException("Invalid date format! Please use dd/MM/yyyy HH:mm");
             }
 
+        } else if (msg.startsWith("find")) {
+            if (msg.length() < 5 || msg.charAt(4) != ' ') {
+                throw new CherryBotException("Invalid format! The find command must be followed by a space and a match string.");
+            }
+
+            String description = msg.substring(5).trim();
+
+            return new FindCommand(description);
         } else {
             throw new CherryBotException("Sorry I don't understand invalid command");
         }
