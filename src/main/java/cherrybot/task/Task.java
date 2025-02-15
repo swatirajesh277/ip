@@ -40,6 +40,9 @@ public class Task {
     public void markAsNotDone() {
         this.isDone = false;
     }
+    public String getDescription() {
+        return this.description;
+    }
 
     /**
      * Returns a string representation of the task, including its status and description.

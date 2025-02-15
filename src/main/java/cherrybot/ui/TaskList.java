@@ -116,5 +116,17 @@ public class TaskList {
         return tasks.isEmpty();
     }
 
+    public ArrayList<Task> findTask(String match) {
+        ArrayList<Task> result = new ArrayList<>();
+
+        for (Task t : tasks) {
+            if (t.getDescription().contains(match)) {
+                result.add(t);
+            }
+        }
+
+        return result;
+    }
+
 
 }
