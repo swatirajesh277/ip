@@ -137,6 +137,12 @@ public class Ui {
         System.out.println("OOPSIE DAISY!!!" + message);
     }
 
+    /**
+     * Displays the list of tasks that match the search keyword.
+     * If no tasks are found, it displays a message indicating no matches were found.
+     *
+     * @param list The list of tasks that match the search criteria.
+     */
     public void showFind(ArrayList<Task> list) {
         if (list.isEmpty()) {
             System.out.println("No matching tasks found!");

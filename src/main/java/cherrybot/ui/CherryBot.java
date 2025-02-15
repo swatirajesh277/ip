@@ -61,6 +61,7 @@ public class CherryBot {
      * @param args Command-line arguments (not used).
      */
     public static void main(String[] args) {
+        Storage.createFileIfNotExists();
         new CherryBot("./data/cherrybot.txt").run();
     }
 

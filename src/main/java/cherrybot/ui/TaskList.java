@@ -116,6 +116,12 @@ public class TaskList {
         return tasks.isEmpty();
     }
 
+    /**
+     * Finds tasks in the task list that match a given string in their description.
+     *
+     * @param match The string to search for in the task descriptions.
+     * @return A list of tasks whose descriptions contain the specified match string.
+     */
     public ArrayList<Task> findTask(String match) {
         ArrayList<Task> result = new ArrayList<>();
 
