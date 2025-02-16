@@ -41,6 +41,26 @@ public class DialogBox extends HBox {
         displayPicture.setClip(clip);
     }
 
+    private void changeDialogStyle(String commandType) {
+        if (commandType == null || commandType.isEmpty()) {
+            commandType = "default";
+        }
+        switch (commandType) {
+        case "AddCommand":
+            dialog.getStyleClass().add("add-label");
+            break;
+        case "ChangeMarkCommand":
+            dialog.getStyleClass().add("marked-label");
+            break;
+        case "DeleteCommand":
+            dialog.getStyleClass().add("delete-label");
+            break;
+        default:
+            dialog.getStyleClass().add("default-label");
+        }
+    }
+
+
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
@@ -56,9 +76,10 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getCherryBotDialog(String text, Image img) {
+    public static DialogBox getCherryBotDialog(String text, Image img, String commandType) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.changeDialogStyle(commandType);
         return db;
 
     }

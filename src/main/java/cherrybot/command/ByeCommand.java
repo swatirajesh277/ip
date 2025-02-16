@@ -5,6 +5,10 @@ import cherrybot.ui.TaskList;
 import cherrybot.ui.Ui;
 
 import java.io.IOException;
+import javafx.application.Platform;
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 /**
  * Represents a command to exit the program.
@@ -28,6 +32,12 @@ public class ByeCommand extends Command {
         try {
             ui.goodbye();
             storage.writeToFile(ui.listFormatForFile(tasks));
+            new Timer().schedule(new TimerTask() {
+                public void run() {
+                    Platform.exit();
+                }
+            }, 2500);
+
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }

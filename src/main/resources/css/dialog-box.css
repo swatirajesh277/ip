@@ -13,6 +13,22 @@
     -fx-border-radius: 1em 1em 1em 0;
 }
 
+.add-label {
+    -fx-background-color: #d8e1ff;
+}
+
+.marked-label {
+    -fx-background-color: #f0f0f0;
+}
+
+.delete-label {
+    -fx-background-color: #ee7272;
+}
+
+.default-label {
+    -fx-background-color: #feecb5;
+}
+
 #displayPicture {
     /* Shadow effect on image. */
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 5, 5);

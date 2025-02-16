@@ -1,3 +1,2 @@
-[T][ ] cs2103t ip
-[D][ ] cs2103t (by: Jan 26 2025 23:59)
-[E][X] meeting (from: Jan 01 2025 18:00 to: Jan 01 2025 19:00)
+[T][X] cs2103t ip
+[T][ ] clean room
