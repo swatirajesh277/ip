@@ -15,15 +15,34 @@
 
 .add-label {
     -fx-background-color: #d8e1ff;
+    -fx-border-color: #b0baff;
+    -fx-border-width: 2px;
 }
 
 .marked-label {
     -fx-background-color: #f0f0f0;
+    -fx-border-color: #d9d9d9;
+    -fx-border-width: 2px;
 }
 
 .delete-label {
-    -fx-background-color: #ee7272;
+    -fx-background-color: #ffb6c1;
+    -fx-border-color: #ff9ea9;
+    -fx-border-width: 2px;
 }
+
+.find-label {
+    -fx-background-color: #c1f0c1;
+    -fx-border-color: #a8d9a8;
+    -fx-border-width: 2px;
+}
+
+.list-label {
+    -fx-background-color: #bbdefb;
+    -fx-border-color: #90c3f5;
+    -fx-border-width: 2px;
+}
+
 
 .default-label {
     -fx-background-color: #feecb5;
