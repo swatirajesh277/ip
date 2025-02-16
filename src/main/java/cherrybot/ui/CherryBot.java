@@ -1,10 +1,14 @@
 package cherrybot.ui;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.util.Scanner;
 
 import cherrybot.command.Command;
 import cherrybot.exception.CherryBotException;
 import cherrybot.storage.Storage;
+
 
 
 /**
@@ -15,6 +19,7 @@ public class CherryBot {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private String commandType;
 
     /**
      * Constructs a CherryBot instance with the given file path for storing tasks.
@@ -27,6 +32,62 @@ public class CherryBot {
         storage = new Storage(filePath);
 
         tasks = new TaskList(storage.loadFile(filePath));
+    }
+
+    /**
+     * Generates a response for the user's chat message.
+     */
+    //Googled how to store System.out and then learnt the theory
+    // and practicals of how to use PrintStream using chatgpt
+    //have attached the pdf of conversations with chatgpt (theory lesson)
+    public String getResponse(String input) {
+        String response;
+        ByteArrayOutputStream outputReal = new ByteArrayOutputStream();
+        PrintStream newOut = new PrintStream(outputReal);
+        PrintStream originalOut = System.out;  //store original print statement in a print stream
+
+        try {
+            System.setOut(newOut); //Redirect system.out to the new print stream
+
+            if (input.isEmpty()) {
+                ui.showError("Invalid command! Did you realize you sent an empty text");
+            }
+
+            Scanner userInput = new Scanner(input);
+            boolean isExit= false;
+
+            while(!isExit && userInput.hasNextLine()) {
+                String fullCommand = userInput.nextLine();
+                ui.showLine(); // show the divider line ("_______")
+                Command c;
+                try {
+                     c = Parser.parse(fullCommand);
+                    if (c == null) {
+                        throw new CherryBotException("Invalid command! Did you realize you sent an empty text");
+                    }
+                } catch (CherryBotException e) {
+                    ui.showError(e.getMessage());
+                    return "OOPSIE DAISY!!!" + e.getMessage();
+                }
+
+                c.execute(tasks, ui, storage);
+                commandType = c.getClass().getSimpleName();
+
+                isExit = c.isExit();
+            }
+            userInput.close();
+            response = outputReal.toString().trim();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            System.setOut(originalOut);
+        }
+        return response;
+    }
+
+    public String getCommandType() {
+        return commandType;
     }
 
     /**
@@ -64,5 +125,8 @@ public class CherryBot {
         Storage.createFileIfNotExists();
         new CherryBot("./data/cherrybot.txt").run();
     }
+
+
+
 
 }

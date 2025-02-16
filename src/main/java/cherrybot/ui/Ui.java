@@ -6,6 +6,7 @@ import java.util.Scanner;
 import cherrybot.exception.CherryBotException;
 import cherrybot.task.Task;
 
+
 /**
  * This class handles all Ui related operations.
  */
