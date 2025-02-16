@@ -28,6 +28,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        String greeting = "⋆˚࿔ CHERRYBOT 𝜗𝜚˚⋆\n" + "Hi! I'm CherryBot\n" + "What can I do for you?";
+        dialogContainer.getChildren().addAll(DialogBox.getGreeting(greeting, cherrybotImage));
     }
 
     /** Injects the Duke instance */

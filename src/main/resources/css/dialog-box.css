@@ -7,7 +7,7 @@
 }
 
 .reply-label {
-    -fx-font-family: "Helvetica", sans-serif;
+    -fx-font-family: "Nunito", "Segoe UI", sans-serif;
     -fx-font-size: 16px;
     -fx-background-radius: 1em 1em 1em 0;
     -fx-border-radius: 1em 1em 1em 0;
@@ -26,7 +26,7 @@
 }
 
 #dialog {
-    -fx-font-family: "Helvetica", sans-serif;
+    -fx-font-family: "Nunito", "Segoe UI", sans-serif;
     -fx-font-size: 16px;
 }
 

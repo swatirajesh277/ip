@@ -1,10 +1,12 @@
 package cherrybot.ui;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 import cherrybot.command.Command;
 import cherrybot.exception.CherryBotException;
 import cherrybot.storage.Storage;
+
 
 
 /**
@@ -27,6 +29,38 @@ public class CherryBot {
         storage = new Storage(filePath);
 
         tasks = new TaskList(storage.loadFile(filePath));
+    }
+
+    /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) {
+        String response = "";
+        try {
+            Scanner userInput = new Scanner(input);
+            boolean isExit= false;
+
+            while(!isExit && userInput.hasNextLine()) {
+                String fullCommand = userInput.nextLine();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+
+                if (c != null) {
+                    c.execute(tasks, ui, storage);
+                }
+
+                isExit = c.isExit();
+            }
+            userInput.close();
+
+        } catch (CherryBotException e) {
+            ui.showError(e.getMessage());
+        } catch (IOException e) {
+            ui.showError(e.getMessage());
+        } finally {
+            ui.showLine();
+        }
+        return response;
     }
 
     /**
@@ -66,11 +100,6 @@ public class CherryBot {
     }
 
 
-    /**
-     * Generates a response for the user's chat message.
-     */
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
+
 
 }
