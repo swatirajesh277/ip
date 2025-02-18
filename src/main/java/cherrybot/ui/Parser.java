@@ -30,6 +30,8 @@ public class Parser {
      * @throws CherryBotException If the input command is invalid or cannot be parsed.
      */
     public static Command parse(String msg) throws CherryBotException {
+
+        assert msg != null;
         if (msg.equals("bye")) {
             return new ByeCommand();
 
@@ -38,6 +40,7 @@ public class Parser {
 
         } else if (msg.startsWith("delete")) {
             String[] splitCommand = msg.trim().split(" ");
+            assert splitCommand != null;
 
             if (splitCommand.length < 2) {
                 throw new CherryBotException("Task number is missing");
@@ -49,6 +52,7 @@ public class Parser {
 
         } else if (msg.startsWith("mark")) {
             String[] splitCommand = msg.trim().split(" ");
+            assert splitCommand != null;
 
             if (splitCommand.length < 2) {
                 throw new CherryBotException("Task number is missing");
@@ -60,6 +64,7 @@ public class Parser {
 
         } else if (msg.startsWith("unmark")) {
             String[] splitCommand = msg.trim().split(" ");
+            assert splitCommand != null;
 
             if (splitCommand.length < 2) {
                 throw new CherryBotException("Task number is missing");
@@ -142,5 +147,4 @@ public class Parser {
             throw new CherryBotException("Sorry I don't understand invalid command");
         }
     }
-
 }
