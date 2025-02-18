@@ -126,7 +126,4 @@ public class CherryBot {
         new CherryBot("./data/cherrybot.txt").run();
     }
 
-
-
-
 }

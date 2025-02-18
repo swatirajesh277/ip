@@ -142,5 +142,4 @@ public class Parser {
             throw new CherryBotException("Sorry I don't understand invalid command");
         }
     }
-
 }
