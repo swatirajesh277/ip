@@ -23,7 +23,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setMinHeight(220);
-            stage.setMinWidth(417);
+            stage.setMinWidth(450);
             fxmlLoader.<MainWindow>getController().setCherryBot(cherryBot);
             stage.show();
         } catch (IOException e) {

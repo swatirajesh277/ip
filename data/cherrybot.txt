@@ -1,2 +1,4 @@
-[T][X] cs2103t ip
-[T][ ] clean room
+[E][ ] meeting (from: Feb 21 2025 20:00 to: Feb 21 2025 20:30)
+[T][ ] cook lunch
+[T][X] take bath
+[D][X] cs2103t ip (by: Feb 21 2025 16:00)
