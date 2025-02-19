@@ -29,12 +29,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String greeting = "⋆˚࿔ CHERRYBOT 𝜗𝜚˚⋆\n" + "Hi! I'm CherryBot\n" + "What can I do for you?\n\n" +
-                "These are the following commands: \n" +
-                "-list\n" + "-mark <tasknumber>\n" + "-unmark <tasknumber>\n"
-                + "-delete <tasknumber>\n" + "-find <matching string>\n" + "-sort\n" +
-                "-todo <description>\n" + "-deadline <description> /by <deadline in dd/mm/yyyy hh:mm>\n" +
-                "-event <description> /from <time in dd/mm/yyyy hh:mm> /to <time in dd/mm/yyyy hh:mm>\n" +
-                "-bye\n\n" + "CherryBot is NOT case sensitive! Have fun making lists!";
+                 "CherryBot is NOT case sensitive! Have fun making lists!";
         dialogContainer.getChildren().addAll(DialogBox.getGreeting(greeting, cherrybotImage));
     }
 
