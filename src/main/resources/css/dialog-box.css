@@ -43,6 +43,12 @@
     -fx-border-width: 2px;
 }
 
+.sort-label {
+    -fx-background-color: #fff8e1;
+    -fx-border-color: #cccc68;
+    -fx-border-width: 2px;
+}
+
 
 .default-label {
     -fx-background-color: #feecb5;

@@ -143,6 +143,9 @@ public class Parser {
             String description = msg.substring(5).trim();
 
             return new FindCommand(description);
+        } else if (msg.startsWith("sort")) {
+            return new SortCommand();
+
         } else {
             throw new CherryBotException("Sorry I don't understand invalid command");
         }

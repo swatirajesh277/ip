@@ -154,4 +154,11 @@ public class Ui {
             }
         }
     }
+
+    public void sortedTasks(ArrayList<Task> list) {
+        System.out.println("Here are the tasks in your list in a sorted order according to deadlines: ");
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("\t" + (i + 1) + ". " + list.get(i).toString());
+        }
+    }
 }
