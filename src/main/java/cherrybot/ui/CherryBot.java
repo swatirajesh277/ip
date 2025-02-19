@@ -58,7 +58,6 @@ public class CherryBot {
 
             while(!isExit && userInput.hasNextLine()) {
                 String fullCommand = userInput.nextLine();
-                ui.showLine(); // show the divider line ("_______")
                 Command c;
                 try {
                      c = Parser.parse(fullCommand);
@@ -101,7 +100,6 @@ public class CherryBot {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
@@ -109,8 +107,6 @@ public class CherryBot {
                 ui.showError(e.getMessage());
             } catch (IOException e) {
                 ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
             }
         }
     }

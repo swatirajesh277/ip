@@ -34,14 +34,6 @@ public class Ui {
      */
     public static void goodbye() {
         System.out.println("\tBye. See you later alligator!");
-        System.out.println("\t________________________________________");
-    }
-
-    /**
-     * Displays a line separator to visually separate commands and messages.
-     */
-    public static void showLine() {
-        System.out.println("\t________________________________________");
     }
 
     /**
