@@ -187,6 +187,7 @@ public class TaskList {
      *
      * @return A list containing all tasks.
      */
+    
 
     public ArrayList<Task> getTasks() {
         return this.tasks;
