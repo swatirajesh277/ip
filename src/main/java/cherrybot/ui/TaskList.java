@@ -139,6 +139,10 @@ public class TaskList {
         return result;
     }
 
+    /**
+     * Sorts tasks in the task list.
+     */
+
     public void sortTask() {
         Comparator<Task> compareTask = new Comparator<Task>() {
             @Override
@@ -177,6 +181,12 @@ public class TaskList {
         };
         Collections.sort(tasks, compareTask);
     }
+
+    /**
+     * Gets all tasks in the task list.
+     *
+     * @return A list containing all tasks.
+     */
 
     public ArrayList<Task> getTasks() {
         return this.tasks;
