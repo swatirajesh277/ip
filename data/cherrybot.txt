@@ -1,3 +1,4 @@
 [D][X] cs2103t ip (by: Feb 21 2025 16:00)
-[T][ ] cook lunch
 [T][ ] cry
+[T][ ] hw
+[D][ ] cs2103t user guide (by: Feb 21 2025 16:00)

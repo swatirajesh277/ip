@@ -32,13 +32,15 @@ public class Parser {
     public static Command parse(String msg) throws CherryBotException {
 
         assert msg != null;
-        if (msg.equals("bye")) {
+        if (msg.toLowerCase().equals("bye")) {
+            msg = msg.toLowerCase();
             return new ByeCommand();
 
-        } else if (msg.equals("list")) {
+        } else if (msg.toLowerCase().equals("list")) {
             return new ListCommand();
 
-        } else if (msg.startsWith("delete")) {
+        } else if (msg.toLowerCase().startsWith("delete")) {
+            msg = msg.toLowerCase();
             String[] splitCommand = msg.trim().split(" ");
             assert splitCommand != null;
 
@@ -50,7 +52,8 @@ public class Parser {
 
             return new DeleteCommand(taskNumber);
 
-        } else if (msg.startsWith("mark")) {
+        } else if (msg.toLowerCase().startsWith("mark")) {
+            msg = msg.toLowerCase();
             String[] splitCommand = msg.trim().split(" ");
             assert splitCommand != null;
 
@@ -62,7 +65,8 @@ public class Parser {
             int taskNumber = Integer.parseInt(foo);
             return new MarkCommand(taskNumber - 1);
 
-        } else if (msg.startsWith("unmark")) {
+        } else if (msg.toLowerCase().startsWith("unmark")) {
+            msg = msg.toLowerCase();
             String[] splitCommand = msg.trim().split(" ");
             assert splitCommand != null;
 
@@ -74,8 +78,8 @@ public class Parser {
             int taskNumber = Integer.parseInt(foo);
             return new UnmarkCommand(taskNumber - 1);
 
-        } else if (msg.startsWith("todo")) {
-
+        } else if (msg.toLowerCase().startsWith("todo")) {
+            msg = msg.toLowerCase();
             if (msg.length() < 5 || msg.charAt(4) != ' ') {
                 throw new CherryBotException("Invalid format! The todo command must be followed by a space and a description.");
             }
@@ -89,7 +93,8 @@ public class Parser {
             Task t = new Todo(description);
             return new AddCommand(t);
 
-        } else if (msg.startsWith("deadline")) {
+        } else if (msg.toLowerCase().startsWith("deadline")) {
+            msg = msg.toLowerCase();
             String activity = msg.trim().substring(8);
 
             if (!activity.contains(" /by")) {
@@ -107,7 +112,8 @@ public class Parser {
                 throw new CherryBotException("Invalid date format! Please use dd/MM/yyyy HH:mm");
             }
 
-        } else if (msg.startsWith("event")) {
+        } else if (msg.toLowerCase().startsWith("event")) {
+            msg = msg.toLowerCase();
             String activity = msg.trim().substring(5);
 
             if (!activity.contains(" /from") && !activity.contains(" /to")) {
@@ -135,7 +141,8 @@ public class Parser {
                 throw new CherryBotException("Invalid date format! Please use dd/MM/yyyy HH:mm");
             }
 
-        } else if (msg.startsWith("find")) {
+        } else if (msg.toLowerCase().startsWith("find")) {
+            msg = msg.toLowerCase();
             if (msg.length() < 5 || msg.charAt(4) != ' ') {
                 throw new CherryBotException("Invalid format! The find command must be followed by a space and a match string.");
             }
@@ -143,7 +150,8 @@ public class Parser {
             String description = msg.substring(5).trim();
 
             return new FindCommand(description);
-        } else if (msg.startsWith("sort")) {
+        } else if (msg.toLowerCase().startsWith("sort")) {
+            msg = msg.toLowerCase();
             return new SortCommand();
 
         } else {
