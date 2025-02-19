@@ -8,7 +8,7 @@ Welcome to CherryBot, your adorable chatbot to help manage your tasks!
 
 This easy to use application allows you to stay on top of your tasks using the following features:
 
-# Adding Tasks ིྀི
+# Adding Tasks 𐙚
 
 You can add your tasks to CherryBot. These are the three types:
 
@@ -30,7 +30,7 @@ Creates a task with a specific deadline. The date and time must be provided usin
 
 Creates a task with the start and end date and time. Specify the start date time using /from command and the end date time using /to command in the format dd-mm-yyyy hh:MM.
 
-# Managing Tasks ིྀི
+# Managing Tasks 𐙚
 
 You can manage your tasks in CherryBot using the following commands:
 
@@ -58,7 +58,7 @@ Deletes the task identified by the entered task number.
 
 Sorts the tasks based on deadline and time. Use this command to see which task/event is due in an orderly manner.
 
-# Searching and Viewing Tasks ིྀི
+# Searching and Viewing Tasks 𐙚
 
 You can view and search your tasks in CherryBot using the following commands:
 
@@ -74,7 +74,7 @@ Finds all tasks that match the keyword entered. This helps you filter tasks base
 
 Displays all tasks in your list in the order they were added. This feature helps you view all tasks at once.
 
-# Exiting the Application ིྀི
+# Exiting the Application 𐙚
 
 You can exit the chatbot and save your changes to the storage file.
 
