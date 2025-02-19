@@ -1,9 +1,14 @@
 package cherrybot.ui;
 
+import cherrybot.task.Deadline;
 import cherrybot.task.Task;
 import cherrybot.exception.CherryBotException;
+import cherrybot.task.Todo;
+import cherrybot.task.Event;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Represents a list of tasks and provides methods for managing and manipulating the tasks.
@@ -133,4 +138,48 @@ public class TaskList {
 
         return result;
     }
+
+    public void sortTask() {
+        Comparator<Task> compareTask = new Comparator<Task>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                if (o1 instanceof Todo && o2 instanceof Todo) {
+                    return 0;
+                }
+                //If one task is to-do, placed in the last
+                if (o1 instanceof Todo) {
+                    return 1;
+                }
+
+                if (o2 instanceof Todo) {
+                    return -1;
+                }
+
+                if (o1 instanceof Deadline && o2 instanceof Deadline) {
+                    return ((Deadline) o1).getBy().compareTo(((Deadline) o2).getBy());
+                }
+
+                if (o1 instanceof Event && o2 instanceof Event) {
+                    return ((Event) o1).getStart().compareTo(((Event) o2).getStart());
+                }
+
+                if (o1 instanceof Event && o2 instanceof Deadline) {
+                    return ((Event) o1).getStart().compareTo(((Deadline) o2).getBy());
+                }
+
+                if (o1 instanceof Deadline && o2 instanceof Event) {
+                    return ((Deadline) o1).getBy().compareTo(((Event) o2).getStart());
+                }
+
+                return 0;
+
+            }
+        };
+        Collections.sort(tasks, compareTask);
+    }
+
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
+    }
+
 }

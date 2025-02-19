@@ -64,6 +64,9 @@ public class DialogBox extends HBox {
         case "ListCommand":
             dialog.getStyleClass().add("list-label");
             break;
+        case "SortCommand":
+            dialog.getStyleClass().add("sort-label");
+            break;
         default:
             dialog.getStyleClass().add("default-label");
         }
