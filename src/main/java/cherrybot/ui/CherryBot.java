@@ -118,8 +118,8 @@ public class CherryBot {
      * @param args Command-line arguments (not used).
      */
     public static void main(String[] args) {
-        String filePath = System.getProperty("user.dir") + "/data/cherrybot.txt";
-        Storage.createFileIfNotExists();
+        String filePath = "/data/cherrybot.txt";
+        Storage.createFileIfNotExists(filePath);
         new CherryBot(filePath).run();
 
     }

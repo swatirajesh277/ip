@@ -32,17 +32,16 @@ public class Storage {
     /**
      * Creates the necessary directories and the storage file if they do not exist.
      */
-    public static void createFileIfNotExists() {
-        File dataDir = new File("./data");
-        if (!dataDir.exists()) {
+    public static void createFileIfNotExists(String filepath) {
+        File file = new File(filepath);
+        File dataDir = file.getParentFile();
+        if (dataDir != null && !dataDir.exists()) {
             dataDir.mkdir();
         }
 
-
-        File f = new File("./data/cherrybot.txt");
-        if (!f.exists()) {
+        if (!file.exists()) {
             try {
-                f.createNewFile();
+                file.createNewFile();
             } catch (IOException e) {
                 System.out.println("Error creating file: " + e.getMessage());
             }
@@ -128,8 +127,8 @@ public class Storage {
      * @param textToAdd The text to be written to the file.
      * @throws IOException If there is an issue writing to the file.
      */
-    public static void writeToFile(String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter("./data/cherrybot.txt");
+    public void writeToFile(String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filepath);
         fw.write(textToAdd);
         fw.close();
     }
