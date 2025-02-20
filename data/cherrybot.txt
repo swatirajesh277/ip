@@ -1,5 +1,6 @@
-[T][ ] make avocado toast
-[D][ ] cs2103t ip (by: Feb 21 2025 23:59)
 [E][ ] nussu isr meeting (from: Feb 20 2025 20:00 to: Feb 20 2025 21:00)
+[D][ ] cs2103t ip (by: Feb 21 2025 23:59)
+[T][ ] make avocado toast
 [T][ ] watch oppenheimer
 [T][ ] go for swimming
+[T][ ] clean room

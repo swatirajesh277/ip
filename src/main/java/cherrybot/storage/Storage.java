@@ -57,9 +57,16 @@ public class Storage {
      */
     public static ArrayList<Task> loadFile(String filepath) {
         ArrayList<Task> tasks = new ArrayList<>();
+        File file = new File(filepath);
+
+        if (!file.exists()) {
+            System.out.println("File not found. Creating a new task file...");
+            createFileIfNotExists(filepath);
+            return tasks;
+        }
+
         try {
-            File f = new File("./data/cherrybot.txt");
-            Scanner fileReader = new Scanner(f);
+            Scanner fileReader = new Scanner(file);
             while (fileReader.hasNextLine()) {
 
                 String line = fileReader.nextLine();
